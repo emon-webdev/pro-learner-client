@@ -10,7 +10,7 @@ const firebaseConfig = {
   projectId: "pro-learner-auth",
   storageBucket: "pro-learner-auth.appspot.com",
   messagingSenderId: "324333176049",
-  appId: "1:324333176049:web:89441df553dd4b84179550"
+  appId: "1:324333176049:web:89441df553dd4b84179550",
 };
 
 // Initialize Firebase
