@@ -1,19 +1,23 @@
 import React from "react";
-import { useLoaderData } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 import CourseDetails from "./CourseDetails";
 
 const Courses = () => {
   const allCourse = useLoaderData();
-
-  console.log(allCourse);
   return (
     <div>
       <h2>All Courses {allCourse.length}</h2>
-
-      <div>
-        {allCourse.map((course) => (
-          <CourseDetails key={course.id} course={course} />
-        ))}
+      <div className="course-container flex">
+        <div className="text-left">
+          {allCourse.map((course) => (
+            <Link to={`/`} key={course.id}>{course.title}</Link>
+          ))}
+        </div>
+        <div className="flex flex-wrap">
+          {allCourse.map((course) => (
+            <CourseDetails key={course.id} course={course} />
+          ))}
+        </div>
       </div>
     </div>
   );

@@ -1,17 +1,23 @@
-import React from 'react';
+import React from "react";
 
-const CourseDetails = ({course}) => {
-    const {title, image, id , price, rating} = course;
-    return (
-        <div>
-            <h2>Courses Details</h2>
-            <h2>{title}</h2>
-            <img src={image} alt="" srcset="" />
-            <h2>{price}</h2>
-            <h2>Pdf download button react to pdf (package)</h2>
-            <h2>Get Premium Access to checkout</h2>
+const CourseDetails = ({ course }) => {
+  const { title, image, id, price, rating } = course;
+  return (
+    <div>
+      <div className="card w-96 bg-base-100 shadow-xl">
+        <figure>
+          <img src={image} alt="Shoes" />
+        </figure>
+        <div className="card-body text-left">
+          <h2 className="card-title">{title}</h2>
+          <p>Price: $ {price}</p>
+          <div className="card-actions">
+            <button className="btn btn-primary">Course Details</button>
+          </div>
         </div>
-    );
+      </div>
+    </div>
+  );
 };
 
 export default CourseDetails;

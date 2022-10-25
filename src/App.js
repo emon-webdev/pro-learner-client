@@ -1,4 +1,5 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 import "./App.css";
 import Blog from "./components/Blog";
 import Checkout from "./components/Checkout";
@@ -37,7 +38,7 @@ const router = createBrowserRouter([
         element: <CourseDetails />,
       },
       {
-        path: "/checkOut",
+        path: "/checkout",
         element: (
           <PrivateRoute>
             <Checkout />
@@ -59,6 +60,7 @@ const router = createBrowserRouter([
 function App() {
   return (
     <div className="App">
+      <ToastContainer />
       <RouterProvider router={router} />
     </div>
   );

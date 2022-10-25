@@ -1,31 +1,92 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useContext } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { AuthContext } from "../contexts/UserContext";
 
 const SignUp = () => {
+  const { googleSignIn, crateUser, updateUserProfile } =
+    useContext(AuthContext);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
+
+  //form submit
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    const form = event.target;
+    const name = form.name.value;
+    const photoUrl = form.photoURL.value;
+    const email = form.email.value;
+    const password = form.password.value;
+
+    console.log(name, photoUrl, email, password);
+
+    //crate user with email and pass
+    crateUser(email, password)
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+        console.log(user);
+        //update profile
+        handleUpdateUserProfile(name, photoUrl);
+        navigate(from, { replace: true });
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.error(errorMessage);
+      });
+  };
+
+  // update profile img
+  const handleUpdateUserProfile = (name, photoURL) => {
+    const profile = {
+      displayName: name,
+      photoURL: photoURL,
+    };
+    updateUserProfile(profile)
+      .then(() => {})
+      .then((error) => console.error(error));
+  };
+
+  //google sign in
+  const handleGoogleSignIn = () => {
+    console.log("google sign in");
+    googleSignIn()
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+        navigate(from, { replace: true });
+      })
+      .catch((error) => console.error(error));
+  };
+
   return (
     <div className="flex  mx-auto text-left">
       <div className="w-full max-w-md mx-auto p-8 space-y-3 rounded-xl bg-violet-400 dark:text-gray-100">
         <h1 className="text-3xl font-bold text-center">Sign Up</h1>
         <form
-          novalidate=""
+          onSubmit={handleSubmit}
+          noValidate=""
           action=""
           className="space-y-6 ng-untouched ng-pristine ng-valid"
         >
           <div className="space-y-1 text-sm">
-            <label for="name" className="block dark:text-gray-400">
+            <label htmlFor="name" className="block dark:text-gray-400">
               Your Name
             </label>
             <input
               type="text"
               name="name"
-              id="name" required
+              id="name"
+              required
               placeholder="Your Name"
               className="w-full px-4 py-3 rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400"
             />
           </div>
           <div className="space-y-1 text-sm">
-            <label for="name" className="block dark:text-gray-400">
-              Your Photo URL 
+            <label htmlFor="name" className="block dark:text-gray-400">
+              Your Photo URL
             </label>
             <input
               type="text"
@@ -36,25 +97,27 @@ const SignUp = () => {
             />
           </div>
           <div className="space-y-1 text-sm">
-            <label for="email" className="block dark:text-gray-400">
+            <label htmlFor="email" className="block dark:text-gray-400">
               Your Email
             </label>
             <input
               type="email"
               name="email"
-              id="email" required
+              id="email"
+              required
               placeholder="Your Email"
               className="w-full px-4 py-3 rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400"
             />
           </div>
           <div className="space-y-1 text-sm">
-            <label for="password" className="block dark:text-gray-400">
+            <label htmlFor="password" className="block dark:text-gray-400">
               Your Password
             </label>
             <input
               type="password"
               name="password"
-              id="password" required
+              id="password"
+              required
               placeholder="Password"
               className="w-full px-4 py-3 rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400"
             />
@@ -76,7 +139,11 @@ const SignUp = () => {
           <div className="flex-1 h-px sm:w-16 dark:bg-gray-700"></div>
         </div>
         <div className="flex justify-center space-x-4">
-          <button aria-label="Log in with Google" className="p-3 rounded-sm">
+          <button
+            onClick={handleGoogleSignIn}
+            aria-label="Log in with Google"
+            className="p-3 rounded-sm"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 32 32"
