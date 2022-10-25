@@ -1,5 +1,5 @@
+import { Toaster } from 'react-hot-toast';
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { ToastContainer } from "react-toastify";
 import "./App.css";
 import Blog from "./components/Blog";
 import Checkout from "./components/Checkout";
@@ -60,7 +60,7 @@ const router = createBrowserRouter([
 function App() {
   return (
     <div className="App">
-      <ToastContainer />
+      <Toaster position="top-center" reverseOrder={false} />
       <RouterProvider router={router} />
     </div>
   );

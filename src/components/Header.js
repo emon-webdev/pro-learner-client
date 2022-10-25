@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { AuthContext } from "../contexts/UserContext";
-
+import Avatar from '../images/avatar.png';
 const Header = () => {
   const { user, logOut } = useContext(AuthContext);
   console.log(user?.email);
@@ -62,7 +62,7 @@ const Header = () => {
                     srcSet=""
                   />
                 ) : (
-                  <>{user?.displayName}</>
+                  <><img src={Avatar} alt="" srcset="" /></>
                 )}
               </div>
             </label>

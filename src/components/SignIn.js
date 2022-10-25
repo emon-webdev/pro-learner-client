@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
+import { toast } from 'react-hot-toast';
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../contexts/UserContext";
-
 const SignIn = () => {
   const { googleSignIn, signIn } = useContext(AuthContext);
   const navigate = useNavigate();
@@ -22,6 +22,7 @@ const SignIn = () => {
         const user = userCredential.user;
         console.log(user);
         navigate(from, { replace: true });
+        toast.success('Successfully Sign In')
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -38,6 +39,7 @@ const SignIn = () => {
         const user = result.user;
         console.log(user);
         navigate(from, { replace: true });
+        toast.success('Successfully Sign In')
       })
       .catch((error) => console.error(error));
   };
