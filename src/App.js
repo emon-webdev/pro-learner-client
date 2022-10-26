@@ -1,4 +1,4 @@
-import { Toaster } from 'react-hot-toast';
+import { Toaster } from "react-hot-toast";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./App.css";
 import Blog from "./components/Blog";
@@ -22,7 +22,14 @@ const router = createBrowserRouter([
         path: "/",
         element: <Courses />,
         loader: async () => {
-          return fetch("courses.json");
+          return fetch("http://localhost:5000/courses");
+        },
+      },
+      {
+        path: "/course/:courseId",
+        element: <CourseDetails />,
+        loader: async ({params}) => {
+          return fetch(`http://localhost:5000/courses/${params.courseId}`);
         },
       },
       {
@@ -32,10 +39,6 @@ const router = createBrowserRouter([
       {
         path: "/blog",
         element: <Blog />,
-      },
-      {
-        path: "/courseDetails",
-        element: <CourseDetails />,
       },
       {
         path: "/checkout",

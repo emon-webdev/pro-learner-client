@@ -1,21 +1,22 @@
 import React from "react";
-import { Link, useLoaderData } from "react-router-dom";
-import CourseDetails from "./CourseDetails";
+import { useLoaderData } from "react-router-dom";
+import Course from "./Course";
+import CourseSideBar from "./CourseSideBar";
 
 const Courses = () => {
   const allCourse = useLoaderData();
   return (
     <div>
-      <h2>All Courses {allCourse.length}</h2>
-      <div className="course-container flex">
-        <div className="text-left">
+      <h2 className="text-5xl py-6 font-bold ml-4 text-violet-700 text-center">All Courses {allCourse.length}</h2>
+      <div className="course-container px-5">
+        <div className=" course-navbar text-left w-[300px]">
           {allCourse.map((course) => (
-            <Link to={`/`} key={course.id}>{course.title}</Link>
+           <CourseSideBar key={course.id} course={course} />
           ))}
         </div>
-        <div className="flex flex-wrap">
+        <div className="course-content">
           {allCourse.map((course) => (
-            <CourseDetails key={course.id} course={course} />
+            <Course key={course.id} course={course} />
           ))}
         </div>
       </div>

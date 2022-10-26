@@ -1,18 +1,22 @@
 import React from "react";
+import { useLoaderData } from "react-router-dom";
 
-const CourseDetails = ({ course }) => {
-  const { title, image, id, price, rating } = course;
+const CourseDetails = () => {
+  const course = useLoaderData();
+  const {title, image, price, description} =  course;
+  console.log(course);
   return (
-    <div>
-      <div className="card w-96 bg-base-100 shadow-xl">
+    <div className="my-20 container mx-auto">
+      <div className=" py-8 card items-center mx-auto  card-side bg-base-100 shadow-xl">
         <figure>
-          <img src={image} alt="Shoes" />
+          <img src={image} alt="Movie" />
         </figure>
-        <div className="card-body text-left">
+        <div className="card-body">
           <h2 className="card-title">{title}</h2>
-          <p>Price: $ {price}</p>
+          <p>{price}</p>
+          <p>{description}</p>
           <div className="card-actions">
-            <button className="btn btn-primary">Course Details</button>
+            <button className="btn btn-primary">Watch</button>
           </div>
         </div>
       </div>
