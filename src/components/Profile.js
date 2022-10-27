@@ -1,13 +1,22 @@
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../contexts/UserContext";
 import Avatar from "../images/avatar.png";
 const Profile = () => {
   const { user, logOut } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const handleLogOut = () => {
+    navigate("/");
+    logOut();
+  };
+
   return (
     <div className="">
       <div className="md:max-w-lg md:flex mx-auto  items-center shadow-orange-50 shadow-xl p-8 sm:flex sm:space-x-6 dark:bg-gray-900 dark:text-gray-100">
-        <div className="profile-img w-[25%] rounded-full" title={user?.displayName}>
+        <div
+          className="profile-img w-[25%] rounded-full"
+          title={user?.displayName}
+        >
           {user?.photoURL ? (
             <img
               className="rounded-full "
@@ -52,7 +61,7 @@ const Profile = () => {
               {user?.uid ? (
                 <>
                   <button
-                    onClick={logOut}
+                    onClick={handleLogOut}
                     aria-label="blog"
                     title="Sign Out"
                     className="btn btn-primary mt-4"

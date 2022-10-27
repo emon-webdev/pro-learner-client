@@ -21,7 +21,6 @@ const UserContext = ({ children }) => {
   const githubProvider = new GithubAuthProvider();
   const [user, setUser] = useState({});
   const [loading, setLoading] = useState(true);
-  const navigate = useNavigate();
 
   //goole Sign in
   const googleSignIn = () => {
@@ -57,7 +56,6 @@ const UserContext = ({ children }) => {
   const logOut = () => {
     setLoading(true);
     toast.success("Successfully Log Out");
-    navigate('/')
     return signOut(auth);
   };
 

@@ -1,11 +1,16 @@
 import React, { useContext, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { AuthContext } from "../contexts/UserContext";
 import Avatar from "../images/avatar.png";
 const Header = () => {
   const { user, logOut } = useContext(AuthContext);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+  const navigate = useNavigate();
+  const handleLogOut = () => {
+    navigate("/");
+    logOut();
+  };
   const menu = (
     <>
       <li>
@@ -42,7 +47,7 @@ const Header = () => {
         <>
           <li>
             <button
-              onClick={logOut}
+              onClick={handleLogOut}
               aria-label="blog"
               title="Sign Out"
               className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
