@@ -7,6 +7,7 @@ import CourseDetails from "./components/CourseDetails";
 import Courses from "./components/Courses";
 import Faq from "./components/Faq";
 import NotFound from "./components/NotFound";
+import Profile from "./components/Profile";
 import SignIn from "./components/SignIn";
 import SignUp from "./components/SignUp";
 import Root from "./Layout/Root";
@@ -22,14 +23,16 @@ const router = createBrowserRouter([
         path: "/",
         element: <Courses />,
         loader: async () => {
-          return fetch("http://localhost:5000/courses");
+          return fetch("https://y-iota-livid.vercel.app/courses/");
         },
       },
       {
         path: "/course/:courseId",
         element: <CourseDetails />,
-        loader: async ({params}) => {
-          return fetch(`http://localhost:5000/courses/${params.courseId}`);
+        loader: async ({ params }) => {
+          return fetch(
+            `https://y-iota-livid.vercel.app/courses/${params.courseId}`
+          );
         },
       },
       {
@@ -41,7 +44,12 @@ const router = createBrowserRouter([
         element: <Blog />,
       },
       {
-        path: "/checkout",
+        path: "/checkout/:courseId",
+        loader: async ({ params }) => {
+          return fetch(
+            `https://y-iota-livid.vercel.app/courses/${params.courseId}`
+          );
+        },
         element: (
           <PrivateRoute>
             <Checkout />
@@ -55,6 +63,10 @@ const router = createBrowserRouter([
       {
         path: "/signup",
         element: <SignUp />,
+      },
+      {
+        path: "/profile",
+        element: <Profile />,
       },
     ],
   },
@@ -70,3 +82,4 @@ function App() {
 }
 
 export default App;
+

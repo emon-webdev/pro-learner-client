@@ -1,14 +1,15 @@
 import {
-    createUserWithEmailAndPassword,
-    getAuth, GithubAuthProvider, GoogleAuthProvider,
-    onAuthStateChanged,
-    signInWithEmailAndPassword,
-    signInWithPopup,
-    signOut,
-    updateProfile
+  createUserWithEmailAndPassword,
+  getAuth, GithubAuthProvider, GoogleAuthProvider,
+  onAuthStateChanged,
+  signInWithEmailAndPassword,
+  signInWithPopup,
+  signOut,
+  updateProfile
 } from "firebase/auth";
 import React, { createContext, useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 import app from "../Firebase/Firebase.init";
 
 
@@ -20,6 +21,7 @@ const UserContext = ({ children }) => {
   const githubProvider = new GithubAuthProvider();
   const [user, setUser] = useState({});
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   //goole Sign in
   const googleSignIn = () => {
@@ -55,6 +57,7 @@ const UserContext = ({ children }) => {
   const logOut = () => {
     setLoading(true);
     toast.success("Successfully Log Out");
+    navigate('/')
     return signOut(auth);
   };
 

@@ -20,16 +20,6 @@ const Header = () => {
       </li>
       <li>
         <NavLink
-          to="/checkout"
-          aria-label="courses"
-          title="courses"
-          className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
-        >
-          Checkout
-        </NavLink>
-      </li>
-      <li>
-        <NavLink
           to="/faq"
           aria-label="faq"
           title="faq"
@@ -50,10 +40,25 @@ const Header = () => {
       </li>
       {user?.uid ? (
         <>
-          <div className="dropdown dropdown-end">
-            <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+          <li>
+            <button
+              onClick={logOut}
+              aria-label="blog"
+              title="Sign Out"
+              className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
+            >
+              Sign Out
+            </button>
+          </li>
+          <li>
+            <NavLink
+              to="/profile"
+              aria-label="profile"
+              title="profile"
+              className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
+            >
               <div className="w-10 rounded-full" title={user?.displayName}>
-                {user.photoURL ? (
+                {user?.photoURL ? (
                   <img
                     className="w-10 rounded-full"
                     src={user?.photoURL}
@@ -66,23 +71,8 @@ const Header = () => {
                   </>
                 )}
               </div>
-            </label>
-            <ul
-              tabIndex={0}
-              className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
-            >
-              <li>
-                <button
-                  onClick={logOut}
-                  aria-label="blog"
-                  title="Sign Out"
-                  className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
-                >
-                  Sign Out
-                </button>
-              </li>
-            </ul>
-          </div>
+            </NavLink>
+          </li>
         </>
       ) : (
         <>
@@ -108,6 +98,7 @@ const Header = () => {
           </li>
         </>
       )}
+
       <label className="swap swap-rotate">
         <input type="checkbox" />
 
